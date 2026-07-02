@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Center white protective health shield / cross -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,20 C42,24 34,28 34,42 C34,64 54,88 54,88 C54,88 74,64 74,42 C74,28 66,24 54,20 Z" />
+    <!-- Heart shape inside the shield -->
+    <path
+        android:fillColor="#00798C"
+        android:pathData="M54,40 C51.5,37 47.5,37 45,39.5 C42.5,42 42.5,46 45,48.5 L54,57.5 L63,48.5 C65.5,46 65.5,42 63,39.5 C60.5,37 56.5,37 54,40 Z" />
+</vector>

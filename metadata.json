@@ -1,0 +1,6 @@
+{
+  "name": "CareLink",
+  "description": "A secure, culturally sensitive companion for HIV health education, risk assessment, medication tracking, and secure storefront in Ghana.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
