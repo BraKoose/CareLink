@@ -20,11 +20,11 @@ Here are the actual screens of the fully functional **CareLink** application in 
 
 | 📱 1. Privacy-First Dashboard | 💬 2. AI Educator (Clinical RAG) | 📝 3. Confidential Risk Quiz |
 | :---: | :---: | :---: |
-| ![CareLink Dashboard](assets/screenshots/dashboard.jpg) | ![AI Educator](assets/screenshots/ai_educator.jpg) | ![Confidential Risk Quiz](assets/screenshots/quiz.jpg) |
+| ![CareLink Dashboard](assets/screenshots/screen_dashboard.jpg) | ![AI Educator](assets/screenshots/screen_ai_educator.jpg) | ![Confidential Risk Quiz](assets/screenshots/screen_quiz.jpg) |
 
 | 🛍️ 4. Secure Wellness Storefront | 🍕 5. Discreet Checkout Disguise |
 | :---: | :---: |
-| ![Wellness Storefront](assets/screenshots/storefront.jpg) | ![Discreet Checkout](assets/screenshots/checkout_disguise.jpg) |
+| ![Wellness Storefront](assets/screenshots/screen_storefront.jpg) | ![Discreet Checkout](assets/screenshots/screen_checkout_disguise.jpg) |
 
 ---
 
