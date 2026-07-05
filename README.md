@@ -14,16 +14,17 @@ Our full slides, team credentials, and business design can be viewed here:
 
 ---
 
-## 📸 Application Mockups & Previews
+## 📸 Application Screenshots
 
-### 1. Privacy-First Dashboard & Health Center
-![CareLink Dashboard](assets/screenshots/carelink_dashboard_mockup.jpg)
+Here are the actual screens of the fully functional **CareLink** application in action:
 
-### 2. Secure Disguise Delivery Packaging
-![Secure Disguise Delivery Packaging](assets/screenshots/carelink_discreet_packaging.jpg)
+| 📱 1. Privacy-First Dashboard | 💬 2. AI Educator (Clinical RAG) | 📝 3. Confidential Risk Quiz |
+| :---: | :---: | :---: |
+| ![CareLink Dashboard](assets/screenshots/dashboard.jpg) | ![AI Educator](assets/screenshots/ai_educator.jpg) | ![Confidential Risk Quiz](assets/screenshots/quiz.jpg) |
 
-### 3. Wellness Marketplace Banner
-![Wellness Storefront Banner](assets/screenshots/store_banner.jpg)
+| 🛍️ 4. Secure Wellness Storefront | 🍕 5. Discreet Checkout Disguise |
+| :---: | :---: |
+| ![Wellness Storefront](assets/screenshots/storefront.jpg) | ![Discreet Checkout](assets/screenshots/checkout_disguise.jpg) |
 
 ---
 
