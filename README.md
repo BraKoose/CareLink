@@ -1,7 +1,7 @@
 # 🌍 CareLink — Breaking the Trust Barrier in HIV & Sexual Health Care
 
 [![Presentation](https://img.shields.io/badge/Canva-Presentation-Teal?style=for-the-badge&logo=canva&logoColor=white)](https://canva.link/cjdi4xw130agcul)
-[![Theme](https://img.shields.io/badge/Hackathon-AI_for_Good_2026-Orange?style=for-the-badge)](https://github.com)
+[![Theme](https://img.shields.io/badge/Hackathon-AI_for_Good_2026-Orange?style=for-the-badge)](https://github.com/BraKoose/CareLink)
 [![Platform](https://img.shields.io/badge/Platform-Android_Jetpack_Compose-blue?style=for-the-badge&logo=android)](https://developer.android.com)
 
 **CareLink** is Ghana's first privacy-first, stigma-resistant digital health infrastructure for HIV, PrEP, and sexual reproductive health. Built by **Team CareLink** for the **Future Tech Kid: AI for Good Hackathon 2026**.
@@ -128,8 +128,8 @@ CareLink is built entirely using **Kotlin, Jetpack Compose, and Material Design 
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/godfredamoako/carelink.git
-   cd carelink
+   git clone https://github.com/BraKoose/CareLink.git
+   cd CareLink
    ```
 
 2. **Configure Environment Secrets:**

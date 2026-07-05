@@ -1,0 +1,4 @@
+# Force Git to treat image files as binary files to prevent line-ending normalization (such as LF/CRLF changes) which can corrupt them and show raw binary gibberish instead of images on GitHub.
+*.jpg binary
+*.jpeg binary
+*.png binary
