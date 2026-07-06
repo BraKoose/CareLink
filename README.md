@@ -1,10 +1,17 @@
 # 🌍 CareLink — Breaking the Trust Barrier in HIV & Sexual Health Care
 
 [![Presentation](https://img.shields.io/badge/Canva-Presentation-Teal?style=for-the-badge&logo=canva&logoColor=white)](https://canva.link/cjdi4xw130agcul)
+[![Live Demo](https://img.shields.io/badge/Live_Web_Demo-Reassuring_Blue-009688?style=for-the-badge&logo=google-chrome&logoColor=white)](https://carelink-877338605609.europe-west2.run.app/)
 [![Theme](https://img.shields.io/badge/Hackathon-AI_for_Good_2026-Orange?style=for-the-badge)](https://github.com/BraKoose/CareLink)
 [![Platform](https://img.shields.io/badge/Platform-Android_Jetpack_Compose-blue?style=for-the-badge&logo=android)](https://developer.android.com)
 
 **CareLink** is Ghana's first privacy-first, stigma-resistant digital health infrastructure for HIV, PrEP, and sexual reproductive health. Built by **Team CareLink** for the **Future Tech Kid: AI for Good Hackathon 2026**.
+
+---
+
+## 🌐 Live Web Demo Link
+For the best experience, or in case the screenshots below do not load properly, judges can explore and test our live web deployment directly:
+👉 **[CareLink Live Web Application](https://carelink-877338605609.europe-west2.run.app/)**
 
 ---
 
