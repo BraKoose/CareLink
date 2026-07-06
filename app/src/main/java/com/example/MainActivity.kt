@@ -7,12 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Chat
-import androidx.compose.material.icons.filled.Dashboard
-import androidx.compose.material.icons.filled.HealthAndSafety
-import androidx.compose.material.icons.filled.LocalPharmacy
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Quiz
+import androidx.compose.material.icons.filled.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -41,18 +36,23 @@ class MainActivity : ComponentActivity() {
         val viewModel = ViewModelProvider(this, CareLinkViewModelFactory(repository))[CareLinkViewModel::class.java]
 
         setContent {
-            MyApplicationTheme {
+            val profile by viewModel.anonymizedProfile.collectAsState()
+            val themeType = profile?.selectedTheme ?: "CLASSIC"
+            val isDisguised = profile?.isDisguised ?: false
+
+            MyApplicationTheme(themeType = themeType) {
                 var currentTab by remember { mutableStateOf(0) }
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
-                        CareLinkTopAppBar()
+                        CareLinkTopAppBar(isDisguised = isDisguised)
                     },
                     bottomBar = {
                         CareLinkBottomNavigation(
                             selectedTab = currentTab,
-                            onTabSelected = { currentTab = it }
+                            onTabSelected = { currentTab = it },
+                            isDisguised = isDisguised
                         )
                     }
                 ) { innerPadding ->
@@ -86,7 +86,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CareLinkTopAppBar() {
+fun CareLinkTopAppBar(isDisguised: Boolean) {
     CenterAlignedTopAppBar(
         title = {
             Row(
@@ -94,13 +94,13 @@ fun CareLinkTopAppBar() {
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.HealthAndSafety,
-                    contentDescription = "CareLink logo",
+                    imageVector = if (isDisguised) Icons.Default.Favorite else Icons.Default.HealthAndSafety,
+                    contentDescription = if (isDisguised) "FlowTrack logo" else "CareLink logo",
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(28.dp)
                 )
                 Text(
-                    text = "CareLink",
+                    text = if (isDisguised) "FlowTrack" else "CareLink",
                     style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.5.sp
@@ -145,7 +145,8 @@ fun CareLinkTopAppBar() {
 @Composable
 fun CareLinkBottomNavigation(
     selectedTab: Int,
-    onTabSelected: (Int) -> Unit
+    onTabSelected: (Int) -> Unit,
+    isDisguised: Boolean
 ) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surface,
@@ -155,10 +156,10 @@ fun CareLinkBottomNavigation(
         NavigationBarItem(
             selected = selectedTab == 0,
             onClick = { onTabSelected(0) },
-            label = { Text("Dashboard", fontSize = 11.sp, fontWeight = FontWeight.SemiBold) },
+            label = { Text(if (isDisguised) "My Flow" else "Dashboard", fontSize = 11.sp, fontWeight = FontWeight.SemiBold) },
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Dashboard,
+                    imageVector = if (isDisguised) Icons.Default.DateRange else Icons.Default.Dashboard,
                     contentDescription = "Dashboard"
                 )
             },
@@ -173,10 +174,10 @@ fun CareLinkBottomNavigation(
         NavigationBarItem(
             selected = selectedTab == 1,
             onClick = { onTabSelected(1) },
-            label = { Text("AI Educator", fontSize = 11.sp, fontWeight = FontWeight.SemiBold) },
+            label = { Text(if (isDisguised) "Symptom Coach" else "AI Educator", fontSize = 11.sp, fontWeight = FontWeight.SemiBold) },
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Chat,
+                    imageVector = if (isDisguised) Icons.Default.Email else Icons.Default.Chat,
                     contentDescription = "AI Educator"
                 )
             },
@@ -191,7 +192,7 @@ fun CareLinkBottomNavigation(
         NavigationBarItem(
             selected = selectedTab == 2,
             onClick = { onTabSelected(2) },
-            label = { Text("Risk Quiz", fontSize = 11.sp, fontWeight = FontWeight.SemiBold) },
+            label = { Text(if (isDisguised) "Wellness Quiz" else "Risk Quiz", fontSize = 11.sp, fontWeight = FontWeight.SemiBold) },
             icon = {
                 Icon(
                     imageVector = Icons.Default.Quiz,
@@ -209,10 +210,10 @@ fun CareLinkBottomNavigation(
         NavigationBarItem(
             selected = selectedTab == 3,
             onClick = { onTabSelected(3) },
-            label = { Text("Store", fontSize = 11.sp, fontWeight = FontWeight.SemiBold) },
+            label = { Text(if (isDisguised) "Essentials" else "Store", fontSize = 11.sp, fontWeight = FontWeight.SemiBold) },
             icon = {
                 Icon(
-                    imageVector = Icons.Default.LocalPharmacy,
+                    imageVector = if (isDisguised) Icons.Default.ShoppingCart else Icons.Default.LocalPharmacy,
                     contentDescription = "Storefront"
                 )
             },

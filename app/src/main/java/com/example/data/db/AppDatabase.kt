@@ -10,6 +10,7 @@ import com.example.data.model.AnonymizedUser
 import com.example.data.model.MedicationLog
 import com.example.data.model.MedicationReminder
 import com.example.data.model.DeliveryOrder
+import com.example.data.model.PeriodLog
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -51,6 +52,16 @@ interface CareLinkDao {
 
     @Query("UPDATE delivery_orders SET trackingStatus = :status WHERE id = :id")
     suspend fun updateOrderStatus(id: Int, status: String)
+
+    // --- Period Tracker Logs ---
+    @Query("SELECT * FROM period_logs ORDER BY dateMillis DESC")
+    fun getAllPeriodLogs(): Flow<List<PeriodLog>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPeriodLog(log: PeriodLog)
+
+    @Query("DELETE FROM period_logs WHERE id = :id")
+    suspend fun deletePeriodLogById(id: Int)
 }
 
 @Database(
@@ -58,7 +69,8 @@ interface CareLinkDao {
         AnonymizedUser::class,
         MedicationLog::class,
         MedicationReminder::class,
-        DeliveryOrder::class
+        DeliveryOrder::class,
+        PeriodLog::class
     ],
     version = 1,
     exportSchema = false

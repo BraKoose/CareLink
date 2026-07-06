@@ -32,22 +32,54 @@ private val LightColorScheme =
     onSurface = LightOnSurface
   )
 
+private val PinkColorScheme =
+  lightColorScheme(
+    primary = PinkPrimary,
+    secondary = PinkSecondary,
+    tertiary = CoolTertiary,
+    background = PinkBackground,
+    surface = PinkSurface,
+    onBackground = PinkOnBackground,
+    onSurface = PinkOnBackground
+  )
+
+private val EmeraldColorScheme =
+  lightColorScheme(
+    primary = EmeraldPrimary,
+    secondary = EmeraldSecondary,
+    tertiary = CoolTertiary,
+    background = EmeraldBackground,
+    surface = EmeraldSurface,
+    onBackground = EmeraldOnBackground,
+    onSurface = EmeraldOnBackground
+  )
+
+private val SunsetColorScheme =
+  lightColorScheme(
+    primary = SunsetPrimary,
+    secondary = SunsetSecondary,
+    tertiary = CoolTertiary,
+    background = SunsetBackground,
+    surface = SunsetSurface,
+    onBackground = SunsetOnBackground,
+    onSurface = SunsetOnBackground
+  )
+
 @Composable
 fun MyApplicationTheme(
+  themeType: String = "CLASSIC",
   darkTheme: Boolean = isSystemInDarkTheme(),
-  // Dynamic color is disabled by default to keep the comforting CareLink palette
-  dynamicColor: Boolean = false,
   content: @Composable () -> Unit,
 ) {
   val colorScheme =
-    when {
-      dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-        val context = LocalContext.current
-        if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+    when (themeType) {
+      "PINK_ORCHID" -> PinkColorScheme
+      "EMERALD" -> EmeraldColorScheme
+      "WARM_SUNSET" -> SunsetColorScheme
+      "DARK_SLATE" -> DarkColorScheme
+      else -> {
+        if (darkTheme) DarkColorScheme else LightColorScheme
       }
-
-      darkTheme -> DarkColorScheme
-      else -> LightColorScheme
     }
 
   MaterialTheme(colorScheme = colorScheme, typography = Typography, content = content)

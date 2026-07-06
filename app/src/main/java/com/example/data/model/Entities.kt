@@ -10,7 +10,10 @@ data class AnonymizedUser(
     val hashedId: String,  // anonymized SHA-256 identifier
     val currentRiskScore: Int = -1, // -1 means not calculated yet
     val riskAssessmentLevel: String = "Unknown", // e.g. "Low", "Medium", "High"
-    val quizCompletedAt: Long = 0
+    val quizCompletedAt: Long = 0,
+    val selectedTheme: String = "CLASSIC", // "CLASSIC", "PINK_ORCHID", "EMERALD", "DARK_SLATE"
+    val isDisguised: Boolean = false,
+    val selectedIcon: String = "DEFAULT" // "DEFAULT", "LOTUS", "WAVE"
 )
 
 @Entity(tableName = "medication_logs")
@@ -42,4 +45,14 @@ data class DeliveryOrder(
     val prescriptionPhotoPath: String? = null, // Path or indicator of upload
     val trackingStatus: String, // "Pending Verification", "Dispatched", "In Transit", "Delivered"
     val orderDateMillis: Long = System.currentTimeMillis()
+)
+
+@Entity(tableName = "period_logs")
+data class PeriodLog(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val dateMillis: Long,
+    val flowIntensity: String, // "Light", "Medium", "Heavy"
+    val symptoms: String, // comma-separated symptoms (e.g. "Cramps, Headache")
+    val mood: String, // e.g. "Happy", "Anxious", "Crampy"
+    val notes: String = ""
 )

@@ -8,6 +8,7 @@ import com.example.data.model.DeliveryOrder
 import com.example.data.model.MedicationLog
 import com.example.data.model.MedicationReminder
 import com.example.data.model.Product
+import com.example.data.model.PeriodLog
 import com.example.data.repository.CareLinkRepository
 import com.example.data.api.GeminiService
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -53,6 +54,13 @@ class CareLinkViewModel(private val repository: CareLinkRepository) : ViewModel(
 
     // --- Storefront & Orders ---
     val allOrders: StateFlow<List<DeliveryOrder>> = repository.allOrders
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
+
+    val allPeriodLogs: StateFlow<List<PeriodLog>> = repository.allPeriodLogs
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
@@ -152,7 +160,10 @@ class CareLinkViewModel(private val repository: CareLinkRepository) : ViewModel(
     }
 
     private suspend fun prepopulateMockData() {
-        // Add default medication reminders & pickups
+        val dayInMs = 24 * 60 * 60 * 1000L
+        val currentTime = System.currentTimeMillis()
+
+        // Add standard medication reminders & pickups
         repository.addReminder(
             MedicationReminder(
                 title = "Daily PrEP Preventive Dose",
@@ -170,9 +181,35 @@ class CareLinkViewModel(private val repository: CareLinkRepository) : ViewModel(
             )
         )
 
-        // Add some mock logs for calendar
-        val dayInMs = 24 * 60 * 60 * 1000L
-        val currentTime = System.currentTimeMillis()
+        // Add some mock period logs for women tracking their menstrual wellness
+        repository.addPeriodLog(
+            PeriodLog(
+                dateMillis = currentTime - dayInMs * 28,
+                flowIntensity = "Heavy",
+                symptoms = "Cramps, Fatigue",
+                mood = "Fatigued",
+                notes = "Cycle started right on schedule."
+            )
+        )
+        repository.addPeriodLog(
+            PeriodLog(
+                dateMillis = currentTime - dayInMs * 27,
+                flowIntensity = "Medium",
+                symptoms = "Cramps",
+                mood = "Anxious",
+                notes = "Drank raspberry leaf tea."
+            )
+        )
+        repository.addPeriodLog(
+            PeriodLog(
+                dateMillis = currentTime - dayInMs * 26,
+                flowIntensity = "Light",
+                symptoms = "None",
+                mood = "Happy",
+                notes = "Energy levels returning!"
+            )
+        )
+
         repository.logMedication(MedicationLog(medType = "PrEP", dateMillis = currentTime - dayInMs * 3, taken = true))
         repository.logMedication(MedicationLog(medType = "PrEP", dateMillis = currentTime - dayInMs * 2, taken = true))
         repository.logMedication(MedicationLog(medType = "PrEP", dateMillis = currentTime - dayInMs * 1, taken = false))
@@ -404,6 +441,49 @@ class CareLinkViewModel(private val repository: CareLinkRepository) : ViewModel(
                     taken = taken
                 )
             )
+        }
+    }
+
+    // --- Theme & Disguise Actions ---
+    fun updateSelectedTheme(themeName: String) {
+        viewModelScope.launch {
+            val current = anonymizedProfile.value ?: return@launch
+            repository.saveProfile(current.copy(selectedTheme = themeName))
+        }
+    }
+
+    fun toggleDisguiseMode(isDisguised: Boolean) {
+        viewModelScope.launch {
+            val current = anonymizedProfile.value ?: return@launch
+            repository.saveProfile(current.copy(isDisguised = isDisguised))
+        }
+    }
+
+    fun updateSelectedIcon(iconName: String) {
+        viewModelScope.launch {
+            val current = anonymizedProfile.value ?: return@launch
+            repository.saveProfile(current.copy(selectedIcon = iconName))
+        }
+    }
+
+    // --- Period Tracker Actions ---
+    fun addPeriodLog(dateMillis: Long, flowIntensity: String, symptoms: String, mood: String, notes: String) {
+        viewModelScope.launch {
+            repository.addPeriodLog(
+                PeriodLog(
+                    dateMillis = dateMillis,
+                    flowIntensity = flowIntensity,
+                    symptoms = symptoms,
+                    mood = mood,
+                    notes = notes
+                )
+            )
+        }
+    }
+
+    fun deletePeriodLog(id: Int) {
+        viewModelScope.launch {
+            repository.deletePeriodLog(id)
         }
     }
 }
